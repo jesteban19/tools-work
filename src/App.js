@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+
+//const fs = require('fs')
+//const pathModule = require('path')
 
 function App() {
+  const { ipcRenderer } = window.require('electron')
+  const [path, setPath] = useState('12')
+
+  console.log(window.require('electron').remote)
+
+  const sendMain = () => {
+    ipcRenderer.send('ping', 'send')
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h4>
+        path: <button onClick={sendMain}>Send Ping</button>
+      </h4>
+      <p>Joseph Esteban {path}</p>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
